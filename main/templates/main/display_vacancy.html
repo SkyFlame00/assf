@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-displayvacancy">
+  <div class="page-mainheader">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <div class="infoline clearfix">
+    <div class="infoline-title">
+      Компания
+    </div>
+
+    <div class="infoline-data">
+      {{ company.name }}
+    </div>
+  </div>
+
+  <div class="infoline clearfix">
+    <div class="infoline-title">
+      Описание
+    </div>
+
+    <div class="infoline-data">
+      {{ description }}
+    </div>
+  </div>
+
+  <div class="infoline clearfix">
+    <div class="infoline-title">
+      Компетенции
+    </div>
+
+    <div class="infoline-data">
+      {% for competency in competencies %}
+      <span class="competency-pill">{{ competency }}</span>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

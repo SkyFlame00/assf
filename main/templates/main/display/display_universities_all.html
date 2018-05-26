@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-displayuniversitiesall">
+  <div class="page-mainheader">
+    <h1>Университеты</h1>
+  </div>
+
+  <table class="basic-table">
+    <thead>
+      <tr>
+        <td>Университет</td>
+        <td>Город</td>
+        <td>Год основания</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for university in universities %}
+      <tr>
+        <td><a href="{% url 'display_university' university.id %}">{{ university.title }}</a></td>
+        <td>{{ university.city }}</td>
+        <td>{{ university.foundation_year }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock %}

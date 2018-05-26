@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-displaycompaniesall">
+  <div class="page-mainheader">
+    <h1>Компании</h1>
+  </div>
+
+  <table class="basic-table">
+    <thead>
+      <tr>
+        <td>Название</td>
+        <td>Год основания</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for company in companies %}
+      <tr>
+        <td><a href="{% url 'display_company' company.id %}">{{ company.name }}</a></td>
+        <td>{{ company.foundation_year }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock %}

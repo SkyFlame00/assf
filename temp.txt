@@ -1,0 +1,5 @@
+{% for program in data.programs %}
+
+<div><a href="{% url 'display_program' program.id %}" target="_blank">{{ program.title }}</a> ({{ program.get_degree_display }})</div>
+
+{% endfor %}

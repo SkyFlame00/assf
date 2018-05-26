@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/suitablestudents.css' %}" />
+{% endblock %}
+
+{% block main %}
+
+<div class="suitablestudents">
+  <div class="page-mainheader">
+    <h1>Наиболее подходящие студенты</h1>
+    <p>На вакансию <a href="{% url 'display_vacancy' vacancy.id %}">{{ vacancy.title }}</a></p>
+  </div>
+
+  <table class="basic-table">
+    <thead>
+      <tr>
+        <td>Студент</td>
+        <td>Компетенции</td>
+        <td>Процент перекрытия</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for item in data %}
+      <tr>
+        <td><a href="{% url 'display_student' item.student.id %}">{{ item.student }}</a></td>
+        <td>
+          {% for competency in item.have %}<span class="suitablestudents-competency-pill competency-pill-have">{{competency}}</span>{% endfor %}
+          {% for competency in item.not_have %}<span class="suitablestudents-competency-pill competency-pill-nothave">{{competency}}</span>{% endfor %}
+        </td>
+        <td>
+          <span class="progressbar-bg {% if item.overlap >= 70 %} progressbar-green {% elif item.overlap < 80 and item.overlap > 50 %} progressbar-yellow {% else %} progressbar-red {% endif %}">
+            <span class="progressbar-overlap" style="width: {{ item.overlap }}%;"></span>
+            <div class="progressbar-percent-bg">
+              <span class="progressbar-percent">{{ item.overlap }}</span>
+            </div>
+          </span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock %}

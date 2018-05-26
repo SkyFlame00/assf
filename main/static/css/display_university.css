@@ -1,0 +1,173 @@
+.page-university {
+  width: 1100px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+/* General animations */
+
+.page-university-header, .page-university-ownertools, .page-university-info, .page-university-programs {
+  opacity: 1;
+  transform: translateY(0);
+  transition: .4s ease-out;
+}
+
+.page-university-header-hidden, .page-university-ownertools-hidden, .page-university-info-hidden, .page-university-programs-hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Header */
+
+.page-university-header {
+
+}
+
+.page-university-header-bg {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-image: url(../img/spbu-bg.jpg);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100%;
+  border-bottom: 3px solid rgb(220,220,220);
+  border-radius: 12px 12px 0 0;
+  box-sizing: border-box;
+}
+
+.page-university-header-info {
+  position: relative;
+  padding: 10px 15px 15px 15px;
+  background: rgb(250,250,250);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+}
+
+.university-icon {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-image: url(../img/spbu-icon.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100%;
+  top: -40px;
+  left: calc(50% - 30px);
+  border-radius: 50%;
+}
+
+.university-header-info-header h2 {
+  font-size: 1.3em;
+  font-weight: normal;
+}
+
+.university-header-info-desc {
+  margin-top: 20px;
+}
+
+/* Owner tools */
+
+.page-university-ownertools {
+  margin-top: 30px;
+}
+
+.page-university-ownertools-pre {
+  float: left;
+  width: 20%;
+  padding: 11px;
+  background: rgb(242,242,242);
+  text-align: center;
+  border-radius: 12px 0 0 12px;
+  box-sizing: border-box;
+}
+
+.page-university-ownertools-actions {
+  float: left;
+  width: 80%;
+  padding: 10px;
+  background: rgb(250,250,250);
+  border-radius: 0 12px 12px 0;
+  box-sizing: border-box;
+}
+
+.page-university-ownertools-actions a {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 12px;
+  background: var(--main-bg-color);
+  color: white;
+  text-decoration: none;
+  font-size: .8em;
+  border-radius: 12px;
+  transition: .2s ease-out;
+}
+
+.page-university-ownertools-actions a:hover {
+  background: var(--main-bg-color-hover);
+  box-shadow: 2px 2px 3px 0 rgba(0,0,0,.2);
+}
+
+/* Info */
+
+.page-university-info {
+  margin-top: 30px;
+  background: rgb(250,250,250);
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #e9e9e9;
+}
+
+/* Programs */
+
+.page-university-programs {
+  margin-top: 30px;
+  background: rgb(250,250,250);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #e9e9e9;
+}
+
+.page-university-programs-header {
+  padding-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.page-university-programs-header h2 {font-size: 1.3em; font-weight: normal;}
+.page-university-programs-block {margin-top: 25px;}
+.page-university-programs-block-header {margin-bottom: 10px; text-align: center;}
+.page-university-programs-block-header h3 {font-size: 1.1em; font-weight: normal;}
+.page-university-programs-block {position: relative;}
+.page-university-programs-block::before {
+  position: absolute;
+  display: block;
+  content: '';
+  width: 1px;
+  height: 100%;
+  background: #e9e9e9;
+  left: 50%;
+}
+
+.page-university-programs-block-bac, .page-university-programs-block-mag {
+
+}
+
+.page-university-programs-block-bac {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.page-university-programs-block-mag {
+  float: left;
+  width: 50%;
+  padding-left: 20px;
+  box-sizing: border-box;
+
+}
+
+.page-university-programs-block ul li {
+  list-style-position: inside;
+  list-style-type: none;
+}

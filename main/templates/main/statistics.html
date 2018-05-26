@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/statistics.css' %}" />
+{% endblock %}
+
+{% block js %}
+{% load static %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+{% endblock %}
+
+{% block main %}
+
+<div class="statistics">
+
+  <div class="statistics-mainheader">
+    <h1>Статистика</h1>
+  </div>
+
+  <div class="statistics-line clearfix">
+    <div class="statistics-block competencies-by-companies">
+      <div class="statistics-header">
+        <h2>Самые востребованные компетенции у компаний</h2>
+      </div>
+
+      <div class="chart">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
+    </div>
+
+    <div class="statistics-block">
+      <div class="statistics-header">
+        <h2>Самые крупные компании по числу вакансий</h2>
+      </div>
+
+      <div class="chart">
+        <canvas id="myChart2" width="400" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="statistics-line clearfix">
+    <div class="statistics-block">
+      <div class="statistics-header">
+        <h2>Самые популярные университеты по числу студентов</h2>
+      </div>
+
+      <div class="chart">
+        <canvas id="myChart3" width="400" height="400"></canvas>
+      </div>
+    </div>
+
+    <div class="statistics-block">
+      <div class="statistics-header">
+        <h2>Топ сфер деятельности по числу вакансий</h2>
+      </div>
+
+      <div class="chart">
+        <canvas id="myChart4" width="400" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="{% static 'js/statistics.js' %}"></script>
+</div>
+
+
+
+{% endblock %}

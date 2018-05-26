@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-verifystudents">
+  <div class="page-mainheader">
+    <h1>Верифицировать студентов</h1>
+  </div>
+
+  {% if success == True %}
+  <div class="msg-success">Изменения успешно сохранены</div>
+  {% endif %}
+
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <table class="basic-table">
+      <thead>
+        <tr>
+          <td>ФИО</td>
+          <td>Направление обучения</td>
+          <td>Ступень обучения</td>
+          <td>Верифицирован</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{ verifystudent_formset.management_form }}
+        {% for item in data %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.program }}</td>
+          <td>{{ item.program.get_degree_display }}</td>
+          <td>{{ item.form.num }} {{ item.form.verified }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="submit-block">
+      <input class="std-btn" type="submit" value="Сохранить" />
+    </div>
+  </form>
+
+</div>
+
+{% endblock %}

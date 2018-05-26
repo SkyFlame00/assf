@@ -1,0 +1,442 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+<script src="{% static 'js/register_student.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+
+<div class="register-page register-page-hidden">
+  <div class="register-page-mainheader">
+    <h1>Регистрация студента</h1>
+  </div>
+
+  <form method="post" action="">
+    {% csrf_token %}
+
+    {{user_form.non_field_errors}}
+    {{student_form.non_field_errors}}
+
+    <div class="msg-attention">
+      Пожалуйста, во избежание серверных ошибок заполняйте все поля в имеющихся и добавленных вами формах (если вы не хотите заполнять добавленную форму, просто удалите ее). Можно не заполнять необязательные поля, у которых имеется соответствующая пометка. Обратите также внимание, что редактирование профиля после его создания пока что невозможно.
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.username.id_for_label }}">Логин</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.username }}
+        </div>
+      </div>
+
+      {% if user_form.username.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.username.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.email.id_for_label }}">Email</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.email }}
+        </div>
+      </div>
+
+      {% if user_form.email.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.email.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.password.id_for_label }}">Пароль</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.password }}
+        </div>
+      </div>
+
+      {% if user_form.password.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.password.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.password_confirmation.id_for_label }}">Подтверждение пароля</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.password_confirmation }}
+        </div>
+      </div>
+
+      {% if user_form.password_confirmation.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.password_confirmation.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ student_form.last_name.id_for_label }}">Фамилия</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ student_form.last_name }}
+        </div>
+      </div>
+
+      {% if student_form.last_name.errors %}
+      <div class="registration-inputline-errors">
+        {{ student_form.last_name.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ student_form.first_name.id_for_label }}">Имя</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ student_form.first_name }}
+        </div>
+      </div>
+
+      {% if student_form.first_name.errors %}
+      <div class="registration-inputline-errors">
+        {{ student_form.first_name.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ student_form.patronymic.id_for_label }}">Отчество
+            <span class="not-required">Необязательное поле</span></label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ student_form.patronymic }}
+        </div>
+      </div>
+
+      {% if student_form.patronymic.errors %}
+      <div class="registration-inputline-errors">
+        {{ student_form.patronymic.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ student_form.city.id_for_label }}">Город
+            <span class="not-required">Необязательное поле</span></label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ student_form.city }}
+        </div>
+      </div>
+
+      {% if student_form.city.errors %}
+      <div class="registration-inputline-errors">
+        {{ student_form.city.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="register-header"><h2>Образование</h2></div>
+    <div class="register-addeduc-block"><button class="register-addeduc" id="add-education" type="button">Добавить образование</button></div>
+
+    {{ studenteducation_formset.management_form }}
+    <div class="education-forms" id="education-forms">
+      {% for studenteducation_form in studenteducation_formset %}
+      <div class="education-form">
+
+        <div class="education-form-info education-form-info-hidden">
+          <div class="education-form-del">
+            <span class="delete-education">
+              <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              	 width="408.483px" height="408.483px" viewBox="0 0 408.483 408.483" style="enable-background:new 0 0 408.483 408.483;"
+              	 xml:space="preserve">
+              	<g>
+              		<path d="M87.748,388.784c0.461,11.01,9.521,19.699,20.539,19.699h191.911c11.018,0,20.078-8.689,20.539-19.699l13.705-289.316
+              			H74.043L87.748,388.784z M247.655,171.329c0-4.61,3.738-8.349,8.35-8.349h13.355c4.609,0,8.35,3.738,8.35,8.349v165.293
+              			c0,4.611-3.738,8.349-8.35,8.349h-13.355c-4.61,0-8.35-3.736-8.35-8.349V171.329z M189.216,171.329
+              			c0-4.61,3.738-8.349,8.349-8.349h13.355c4.609,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.737,8.349-8.349,8.349h-13.355
+              			c-4.61,0-8.349-3.736-8.349-8.349V171.329L189.216,171.329z M130.775,171.329c0-4.61,3.738-8.349,8.349-8.349h13.356
+              			c4.61,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.738,8.349-8.349,8.349h-13.356c-4.61,0-8.349-3.736-8.349-8.349V171.329z"/>
+              		<path d="M343.567,21.043h-88.535V4.305c0-2.377-1.927-4.305-4.305-4.305h-92.971c-2.377,0-4.304,1.928-4.304,4.305v16.737H64.916
+              			c-7.125,0-12.9,5.776-12.9,12.901V74.47h304.451V33.944C356.467,26.819,350.692,21.043,343.567,21.043z"/>
+              	</g>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="registration-inputline-wrapper choose-university">
+          <div class="registration-inputline clearfix university">
+            <div class="registration-inputline-labelblock">
+              <label for="{{ studenteducation_form.university.id_for_label }}">Университет</label>
+            </div>
+            <div class="registration-inputline-inputblock">
+              {{ studenteducation_form.university }}
+            </div>
+          </div>
+
+          {% if studenteducation_form.university.errors %}
+          <div class="registration-inputline-errors">
+            {{ studenteducation_form.university.errors }}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="registration-inputline-wrapper choose-degree">
+          <div class="registration-inputline clearfix university degree">
+            <div class="registration-inputline-labelblock">
+              <label for="{{ studenteducation_form.degree.id_for_label }}">Ступень обучения</label>
+            </div>
+            <div class="registration-inputline-inputblock">
+              {{ studenteducation_form.degree }}
+            </div>
+          </div>
+
+          {% if studenteducation_form.degree.errors %}
+          <div class="registration-inputline-errors">
+            {{ studenteducation_form.degree.errors }}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="registration-inputline-wrapper choose-program">
+          <div class="registration-inputline clearfix university">
+            <div class="registration-inputline-labelblock">
+              <label for="{{ studenteducation_form.program.id_for_label }}">Направление обучения</label>
+            </div>
+            <div class="registration-inputline-inputblock">
+              {{ studenteducation_form.program }}
+            </div>
+          </div>
+
+          {% if studenteducation_form.program.errors %}
+          <div class="registration-inputline-errors">
+            {{ studenteducation_form.program.errors }}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="registration-inputline-wrapper choose-program">
+          <div class="registration-inputline clearfix university year_start">
+            <div class="registration-inputline-labelblock">
+              <label for="{{ studenteducation_form.year_start.id_for_label }}">Год начала</label>
+            </div>
+            <div class="registration-inputline-inputblock">
+              {{ studenteducation_form.year_start }}
+            </div>
+          </div>
+
+          {% if studenteducation_form.year_start.errors %}
+          <div class="registration-inputline-errors">
+            {{ studenteducation_form.year_start.errors }}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="registration-inputline-wrapper choose-program">
+          <div class="registration-inputline clearfix university year_end">
+            <div class="registration-inputline-labelblock">
+              <label for="{{ studenteducation_form.year_end.id_for_label }}">Год окончания</label>
+            </div>
+            <div class="registration-inputline-inputblock">
+              {{ studenteducation_form.year_end }}
+            </div>
+          </div>
+
+          {% if studenteducation_form.year_end.errors %}
+          <div class="registration-inputline-errors">
+            {{ studenteducation_form.year_end.errors }}
+          </div>
+          {% endif %}
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="register-header" style="margin-top: -25px;"><h2>Опыт работы</h2></div>
+    <div class="register-addeduc-block"><button class="register-addeduc add-job" id="add-job" type="button">Добавить место работы</button></div>
+
+    {{ studentjob_formset.management_form }}
+    <div class="job-forms" id="job-forms">
+    {% for studentjob_form in studentjob_formset %}
+      <div class="job-form">
+
+        <div class="job-form-info job-form-info-hidden">
+          <div class="job-form-del">
+            <span class="delete-job">
+              <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              	 width="408.483px" height="408.483px" viewBox="0 0 408.483 408.483" style="enable-background:new 0 0 408.483 408.483;"
+              	 xml:space="preserve">
+              	<g>
+              		<path d="M87.748,388.784c0.461,11.01,9.521,19.699,20.539,19.699h191.911c11.018,0,20.078-8.689,20.539-19.699l13.705-289.316
+              			H74.043L87.748,388.784z M247.655,171.329c0-4.61,3.738-8.349,8.35-8.349h13.355c4.609,0,8.35,3.738,8.35,8.349v165.293
+              			c0,4.611-3.738,8.349-8.35,8.349h-13.355c-4.61,0-8.35-3.736-8.35-8.349V171.329z M189.216,171.329
+              			c0-4.61,3.738-8.349,8.349-8.349h13.355c4.609,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.737,8.349-8.349,8.349h-13.355
+              			c-4.61,0-8.349-3.736-8.349-8.349V171.329L189.216,171.329z M130.775,171.329c0-4.61,3.738-8.349,8.349-8.349h13.356
+              			c4.61,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.738,8.349-8.349,8.349h-13.356c-4.61,0-8.349-3.736-8.349-8.349V171.329z"/>
+              		<path d="M343.567,21.043h-88.535V4.305c0-2.377-1.927-4.305-4.305-4.305h-92.971c-2.377,0-4.304,1.928-4.304,4.305v16.737H64.916
+              			c-7.125,0-12.9,5.776-12.9,12.901V74.47h304.451V33.944C356.467,26.819,350.692,21.043,343.567,21.043z"/>
+              	</g>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="registration-inputline-wrapper choose-program">
+          <div class="registration-inputline clearfix university">
+            <div class="registration-inputline-labelblock">
+              <label for="{{ studentjob_form.company.id_for_label }}">Компания</label>
+            </div>
+            <div class="registration-inputline-inputblock">
+              {{ studentjob_form.company }}
+            </div>
+          </div>
+
+          {% if studentjob_form.company.errors %}
+          <div class="registration-inputline-errors">
+            {{ studentjob_form.company.errors }}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="registration-inputline-wrapper choose-program">
+          <div class="registration-inputline clearfix university">
+            <div class="registration-inputline-labelblock">
+              <label for="{{ studentjob_form.position.id_for_label }}">Должность</label>
+            </div>
+            <div class="registration-inputline-inputblock">
+              {{ studentjob_form.position }}
+            </div>
+          </div>
+
+          {% if studentjob_form.position.errors %}
+          <div class="registration-inputline-errors">
+            {{ studentjob_form.position.errors }}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="registration-inputline-wrapper choose-program">
+          <div class="registration-inputline clearfix university year_start">
+            <div class="registration-inputline-labelblock">
+              <label for="{{ studentjob_form.year_start.id_for_label }}">Год начала</label>
+            </div>
+            <div class="registration-inputline-inputblock">
+              {{ studentjob_form.year_start }}
+            </div>
+          </div>
+
+          {% if studentjob_form.year_start.errors %}
+          <div class="registration-inputline-errors">
+            {{ studentjob_form.year_start.errors }}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="registration-inputline-wrapper choose-program">
+          <div class="registration-inputline clearfix university year_end">
+            <div class="registration-inputline-labelblock">
+              <label for="{{ studentjob_form.year_end.id_for_label }}">Год окончания</label>
+            </div>
+            <div class="registration-inputline-inputblock">
+              {{ studentjob_form.year_end }}
+            </div>
+          </div>
+
+          {% if studentjob_form.year_end.errors %}
+          <div class="registration-inputline-errors">
+            {{ studentjob_form.year_end.errors }}
+          </div>
+          {% endif %}
+        </div>
+
+
+      </div>
+    {% endfor %}
+    </div>
+
+    <div class="register-header" style="margin-top: -25px; margin-bottom: 25px;"><h2>Дополнительные компетенции</h2></div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix competency-category">
+        <div class="registration-inputline-labelblock">
+          <label for="subject-areas">Категория</label>
+        </div>
+        <div class="registration-inputline-inputblock">
+          <select name="subject-areas" id="subject-areas">
+            <option selected="selected"></option>
+            {% for subject_area in subject_areas %}
+            <option value="{{ subject_area.id }}">{{ subject_area.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="subject-areas">Компетенция</label>
+        </div>
+        <div class="registration-inputline-inputblock">
+          <select name="competencies-select" id="competencies-select">
+            <option selected="selected"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    {{ studentadditionalcompetency_formset.management_form }}
+
+    <div class="competencies" id="competencies">
+      <div class="competencies-placeholder"><p>Если необходимо, выберите компетенции</p></div>
+      {% for form in studentadditionalcompetency_formset %}
+      {{ form }}
+      {% endfor %}
+    </div>
+
+    <div class="register-submit-block">
+      <input class="std-btn std-btn-final" type="submit" value="Зарегистрироваться" />
+    </div>
+  </form>
+</div>
+
+{% endblock %}

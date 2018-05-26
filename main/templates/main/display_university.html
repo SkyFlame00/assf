@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/display_university.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-university">
+
+  <div class="page-university-header page-university-header-hidden">
+    <div class="page-university-header-bg" style="background-image: url({{ data.bg_src }});">
+
+    </div>
+
+    <div class="page-university-header-info">
+      <div class="university-header-info-header">
+        <h2>{{ data.title }}</h2>
+      </div>
+
+      <div class="university-header-info-desc">
+        {{ data.description }}
+      </div>
+    </div>
+  </div>
+
+  {% if user == university.user %}
+  <div class="page-university-ownertools page-university-ownertools-hidden clearfix">
+    <div class="page-university-ownertools-pre">
+      Доступные действия
+    </div>
+
+    <div class="page-university-ownertools-actions">
+      <a href="{% url 'add_program' %}">Добавить учебную программу</a>
+      <a href="{% url 'verify_students' %}">Верифицировать студентов</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="page-university-info page-university-info-hidden">
+    <span>Основан в {{ data.foundation_year }} г.</span> |
+    <span>Студентов на портале: 200</span> |
+    <span>{{ data.city }}</span>
+  </div>
+
+  <div class="page-university-programs page-university-programs-hidden">
+    <div class="page-university-programs-header">
+      <h2>Учебные программы (<a href="{% url 'display_programs' university.id %}">все</a>)</h2>
+    </div>
+
+    <div class="page-university-programs-block clearfix">
+      <div class="page-university-programs-block-bac">
+        <div class="page-university-programs-block-header">
+          <h3>Бакалавриат</h3>
+        </div>
+
+        <ul>
+          {% for bac in data.bachelor %}
+          <li><a href="{% url 'display_program' bac.id %}">{{ bac.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="page-university-programs-block-mag">
+        <div class="page-university-programs-block-header">
+          <h3>Магистратура</h3>
+        </div>
+
+        <ul>
+          {% for mag in data.magister %}
+          <li><a href="{% url 'display_program' mag.id %}">{{ mag.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

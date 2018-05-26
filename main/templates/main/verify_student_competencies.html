@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-verifystudentscompetencies">
+  <div class="page-mainheader">
+    <h1>Верифицировать компетенции (<a href="{% url 'display_student' student.id %}">{{ student }}</a>)</h1>
+  </div>
+
+  {% if success == True %}
+  <div class="msg-success">Изменения успешно сохранены</div>
+  {% endif %}
+
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <table class="basic-table">
+      <thead>
+        <tr>
+          <td>Компетенция</td>
+          <td>Категория</td>
+          <td>Кем еще верифицирована</td>
+          <td>Верифицирована</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{ verifystudentcompetencies_formset.management_form }}
+        {% for item in data %}
+        <tr>
+          <td>{{ item.competency }}</td>
+          <td>{{ item.category }}</td>
+          <td>
+            {% for verificator in item.who_else_verified %}
+              {% if verificator.user_type == 'unv' %}
+              <a class="verification-pill-university" href="{% url 'display_university' verificator.university_set.all.0.id %}">{{ verificator.university_set.all.0.title }}</a>
+              {% endif %}
+
+              {% if verificator.user_type == 'com' %}
+              <a class="verification-pill-company" href="{% url 'display_company' verificator.company_set.all.0.id %}">{{ verificator.company_set.all.0.name }}</a>
+              {% endif %}
+            {% endfor %}
+
+            {% if not item.who_else_verified %}
+            -
+            {% endif %}
+          </td>
+          <td>{{ item.form.num }}{{ item.form.verified }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="submit-block">
+      <input class="std-btn" type="submit" value="Сохранить" />
+    </div>
+  </form>
+
+</div>
+
+{% endblock %}

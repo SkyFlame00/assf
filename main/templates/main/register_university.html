@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+<div class="register-page register-page-hidden">
+  <div class="register-page-mainheader">
+    <h1>Регистрация университета</h1>
+  </div>
+
+  <form method="post" action="">
+    {% csrf_token %}
+
+    {{user_form.non_field_errors}}
+    {{university_form.non_field_errors}}
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.username.id_for_label }}">Логин университета</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.username }}
+        </div>
+      </div>
+
+      {% if user_form.username.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.username.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ university_form.title.id_for_label }}">Название университета</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ university_form.title }}
+        </div>
+      </div>
+
+      {% if university_form.title.errors %}
+      <div class="registration-inputline-errors">
+        {{ university_form.title.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.email.id_for_label }}">Рабочий e-mail</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.email }}
+        </div>
+      </div>
+
+      {% if user_form.email.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.email.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.password.id_for_label }}">Пароль</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.password }}
+        </div>
+      </div>
+
+      {% if user_form.password.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.password.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.password_confirmation.id_for_label }}">Подтверждение пароля</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.password_confirmation }}
+        </div>
+      </div>
+
+      {% if user_form.password_confirmation.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.password_confirmation.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ university_form.city.id_for_label }}">Город</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ university_form.city }}
+        </div>
+      </div>
+
+      {% if university_form.city.errors %}
+      <div class="registration-inputline-errors">
+        {{ university_form.city.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ university_form.foundation_year.id_for_label }}">Год основания</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ university_form.foundation_year }}
+        </div>
+      </div>
+
+      {% if university_form.foundation_year.errors %}
+      <div class="registration-inputline-errors">
+        {{ university_form.foundation_year.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ university_form.description.id_for_label }}">Описание</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ university_form.description }}
+        </div>
+      </div>
+
+      {% if university_form.description.errors %}
+      <div class="registration-inputline-errors">
+        {{ university_form.description.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="register-submit-block">
+      <input class="std-btn std-btn-final" type="submit" value="Зарегистрироваться" />
+    </div>
+  </form>
+</div>
+{% endblock %}

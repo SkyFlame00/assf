@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+{% endblock %}
+
+{% block js %}
+{% load static %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+{% endblock %}
+
+{% block main %}
+
+<div class="index">
+  <div class="search-block">
+    <form action="" method="post">
+      {% csrf_token %}
+
+      <div class="search-block-labelblock">
+        <label for="{{ search_form.text.id_for_label }}">Поиск вакансий</label>
+      </div>
+
+      <div class="search-block-inputblock clearfix">
+        {{ search_form.text }}
+        <input type="submit" value="Поиск" />
+      </div>
+
+      <div class="search-block-optionsblock clearfix">
+        {{ search_form.select }}
+      </div>
+    </form>
+  </div>
+
+  <div class="hello-block">
+    <div class="hello-block-header">
+      <h2>Что это за сайт?</h2>
+      <span class="hello-close" id="hello-close">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.9 21.9" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 21.9 21.9">
+          <path d="M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0  c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4  s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3  s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7  s-0.1-0.5-0.3-0.7L14.1,11.3z"/>
+        </svg>
+      </span>
+    </div>
+
+    <div class="hello-block-body">
+      <p>
+        Это карьерный веб-портал, который объединяет усилия студентов, компаний и университетов и помогает каждой стороне эффективнее достигать целей: студентам - искать работу и оценивать свой уровень конкурентноспособности, компаниям - искать кандидатов на свои должности с меньшей тратой ресурсов, университетам - повышать степень трудоустройства студентов.
+      </p>
+    </div>
+  </div>
+
+  <div class="usersblocks clearfix">
+    <div class="usersblocks-student usersblock">
+      <div class="usersblock-header">
+        <h3>Для студентов</h3>
+      </div>
+
+      <div class="usersblock-body">
+        <p>Ищите работу? Хотите стажироваться или обучаться в компании с возможностью дальнейшего трудоустройства?</p>
+        <p>Мы также предоставляем возможности для составления портфолио, подтверждения ваших компетенции и многое другое (нет).</p>
+        <ul class="links">
+          <li><a href="#"><span>Как получить верификацию от ВУЗа?</span></a></li>
+          <li><a href="#"><span>Как подтвердить свои компетенции?</span></a></li>
+          <li><a href="#"><span>Как составить портфолио?</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="usersblocks-company usersblock">
+      <div class="usersblock-header">
+        <h3>Для компаний</h3>
+      </div>
+
+      <div class="usersblock-body">
+        <p>Найдите студентов и выпускников с необходимыми знаниями и навыками.</p>
+        <p>Определите направления и ВУЗы, наиболее релевантные вашим вакансиям и стажировкам. Заключайте соглашения с ВУЗами</p>
+        <ul class="links">
+          <li><a href="#"><span>Как отобрать наиболее подходящих студентов и выпускников?</span></a></li>
+          <li><a href="#"><span>Как правильно создать вакансию?</span></a></li>
+          <li><a href="#"><span>Что если на сайте нет подходящих компетенций?</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="usersblocks-university usersblock">
+      <div class="usersblock-header">
+        <h3>Для университетов</h3>
+      </div>
+
+      <div class="usersblock-body">
+        <p>
+          Получите возможность увеличить количество трудоустроенных выпускников и студентов, найдите компании, желающие сотрудничать с ВУЗами, повысьте позиции ВУЗа в международных рейтингах.
+        </p>
+        <ul class="links">
+          <li><a href="#"><span>Как верифицировать студента?</span></a></li>
+          <li><a href="#"><span>Как правильно добавить учебную программу?</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="last-added clearfix">
+    <div class="last-added-left">
+      <div class="last-added-header">
+        <h3>Последние добавленные вакансии</h3>
+      </div>
+
+      <div class="last-added-body">
+        {% for vac in last5vacs %}
+        <ul>
+          <li><a href="{% url 'display_vacancy' vac.id %}">{{ vac.title }}</a> <a href="{% url 'display_company' vac.company.id %}" class="last-added-pill">{{ vac.company.name }}</a></li>
+        </ul>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="last-added-right">
+      <div class="last-added-header">
+        <h3>Последние добавленные компании</h3>
+      </div>
+
+      <div class="last-added-body">
+        {% for company in last5companies %}
+        <ul>
+          <li><a href="{% url 'display_company' company.id %}">{{ company.name }}</a></li>
+        </ul>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="statistics">
+    <div class="statistics-block-left">
+      <div class="statistics-header">
+        <h3>Самые крупные компании по числу вакансий</h3>
+      </div>
+
+      <div class="statistics-body">
+        <div class="chart">
+          <canvas id="myChart1" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="statistics-block-right">
+      <div class="statistics-header">
+        <h3>Топ сфер деятельности по числу вакансий</h3>
+      </div>
+
+      <div class="statistics-body">
+        <div class="chart">
+          <canvas id="myChart2" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/index.js' %}"></script>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-displaycompany">
+
+  {% if user == company.user %}
+  <div class="page-company-ownertools">
+    <a href="{% url 'add_vacancy' %}">Добавить вакансию</a>
+    <a href="{% url 'verify_students_jobs' %}">Верифицировать студентов</a>
+  </div>
+  {% endif %}
+
+  <div class="page-displaycompany-container">
+    <div class="page-displaycompany-container-header">
+      <h1>{{ data.name }}</h1>
+    </div>
+
+    <div class="page-displaycompany-container-body">
+      <div class="infoline clearfix">
+        <div class="infoline-title">
+          Год основания
+        </div>
+
+        <div class="infoline-data">
+          {{ data.foundation_year }}
+        </div>
+      </div>
+
+      <div class="infoline clearfix">
+        <div class="infoline-title">
+          Описание
+        </div>
+
+        <div class="infoline-data">
+          {{ data.description }}
+        </div>
+      </div>
+
+      <div class="page-displaycompany-container-body-header">
+        <h2>Вакансии (<a href="{% url 'display_vacancies' company.id %}">все</a>)</h2>
+      </div>
+
+      <ul class="vacancies">
+        {% for vacancy in data.vacancies %}
+        <li><a href="{% url 'display_vacancy' vacancy.id %}">{{ vacancy.title }}</a></li>
+        {% endfor %}
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

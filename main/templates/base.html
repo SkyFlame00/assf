@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+
+    {% block css %} {% endblock %}
+
+    {% block js %} {% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/functions.js' %}"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+
+    {% block additionals %} {% endblock %}
+
+  </head>
+
+  <body>
+
+    {% if not user.is_authenticated %}
+    <div class="popup-wrapper popup-login" id="login-wrapper">
+      <div class="popup-window" id="login-window">
+        <div class="popup-header">
+          <h2>Вход на сайт</h2>
+          <span class="popup-close" id="popup-close">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.9 21.9" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 21.9 21.9">
+              <path d="M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0  c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4  s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3  s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7  s-0.1-0.5-0.3-0.7L14.1,11.3z"/>
+            </svg>
+          </span>
+        </div>
+        <div class="popup-body">
+          <form action="{% url 'index' %}" method="POST">
+            {% csrf_token %}
+
+            {% if failedOnUserAuthorisation %}
+            <script>
+              $(document).ready(() => {
+                $('#login-wrapper').css({
+                  'visibility': 'visible',
+                  'opacity': '1'
+                });
+              });
+            </script>
+
+            <div class="login-error">
+              <p>Пользователя с таким логином и паролем не существует</p>
+            </div>
+            {% endif %}
+
+            <div class="popup-form-inputline">
+              <label for="{{ login_form.username.id_for_label }}">Логин</label>
+              <input type="text" name="username" />
+            </div>
+            <div class="popup-form-inputline">
+              <label for="{{ login_form.password.id_for_label }}">Пароль</label>
+              <input type="password" name="password" />
+            </div>
+            <input class="std-btn" type="submit" value="Войти" />
+          </form>
+        </div>
+      </div>
+
+      <div class="popup-window popup-registerbtns" id="popup-registerbtns">
+        <div class="popup-header">
+          <h2>Зарегистрироваться как</h2>
+          <span class="popup-close" id="popup-close">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.9 21.9" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 21.9 21.9">
+              <path d="M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0  c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4  s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3  s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7  s-0.1-0.5-0.3-0.7L14.1,11.3z"/>
+            </svg>
+          </span>
+        </div>
+        <div class="popup-body">
+          <div class="bottom-line clearfix">
+            <a href="{% url 'register_student' %}">Студент</a>
+            <a href="{% url 'register_company' %}">Компания</a>
+            <a href="{% url 'register_university' %}">Университет</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    {% endif %}
+
+    <div class="wrapper">
+      <div class="all">
+        <div class="header-wrapper">
+          <header class="header">
+            <div class="header-links">
+              <ul>
+                <li><a href="{% url 'index' %}">Главная</a></li>
+              </ul>
+            </div>
+
+            <div class="header-logo">
+              <!--<object type="image/svg+xml" data="{% static 'img/logo.svg' %}" width="35" height="35" >
+                 Your browser does not support SVG
+              </object>-->
+            </div>
+
+            <div class="header-panel">
+              {% if user.is_authenticated %}
+                {% if user.user_type == 'st' %}
+                <div class="header-panel-profile-wrapper">
+                  <button type="button" id="header-panel-profile-btn">{{ user.username }}</button>
+
+                  <div class="header-panel-profile-links" id="header-panel-profile-links">
+                    <ul>
+                      <li><a href="{% url 'profile' %}">Профиль</a></li>
+                      <li><a href="{% url 'display_suitablevacancies' %}">Подобрать вакансии</a></li>
+                      <li><a href="{% url 'logout' %}">Выйти</a></li>
+                    </ul>
+                  </div>
+                </div>
+                {% endif %}
+
+                {% if user.user_type == 'unv' %}
+                <div class="header-panel-profile-wrapper">
+                  <button type="button" id="header-panel-profile-btn">{{ user.username }}</button>
+
+                  <div class="header-panel-profile-links" id="header-panel-profile-links">
+                    <ul>
+                      <li><a href="{% url 'profile' %}">Профиль</a></li>
+                      <li><a href="{% url 'add_program' %}">Добавить учебную программу</a></li>
+                      <li><a href="{% url 'verify_students' %}">Верифицировать студентов</a></li>
+                      <li><a href="{% url 'logout' %}">Выйти</a></li>
+                    </ul>
+                  </div>
+                </div>
+                {% endif %}
+
+                {% if user.user_type == 'com' %}
+                <div class="header-panel-profile-wrapper">
+                  <button type="button" id="header-panel-profile-btn">{{ user.username }}</button>
+
+                  <div class="header-panel-profile-links" id="header-panel-profile-links">
+                    <ul>
+                      <li><a href="{% url 'profile' %}">Профиль</a></li>
+                      <li><a href="{% url 'add_vacancy' %}">Добавить вакансию</a></li>
+                      <li><a href="{% url 'verify_students_jobs' %}">Верифицировать студентов</a></li>
+                      <li><a href="{% url 'logout' %}">Выйти</a></li>
+                    </ul>
+                  </div>
+                </div>
+                {% endif %}
+
+              {% else %}
+              <div class="header-notauthenticated">
+                <button id="open-login-form">Войти</button>
+                <button id="open-register-window">Зарегистрироваться</button>
+              </div>
+              {% endif %}
+            </div>
+          </header>
+
+        </div>
+
+        <div class="fast-links-wrapper">
+          <div class="fast-links">
+            <ul>
+              <li><a href="{% url 'display_universities_all' %}">Университеты</a></li>
+              <li><a href="{% url 'display_companies_all' %}">Компании</a></li>
+              <li><a href="{% url 'display_vacancies_all' %}">Вакансии</a></li>
+              <li><a href="{% url 'statistics' %}">Статистика</a></li>
+            </ul>
+          </div>
+        </div>
+
+        {% block main %} {% endblock %}
+      </div>
+
+      <div class="footer-wrapper">
+        <footer class="footer">
+          Created by <a class="author" href="{% url 'display_student' 1 %}">Anton Tikhonov</a>
+        </footer>
+      </div>
+    </div>
+
+  </body>
+</html>

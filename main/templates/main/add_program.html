@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+<script src="{% static 'js/add_program.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+
+<div class="register-page register-page-hidden">
+  <div class="register-page-mainheader">
+    <h1>Добавить учебную программу</h1>
+  </div>
+
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ addprogramform.title.id_for_label }}">Название программы</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ addprogramform.title }}
+        </div>
+      </div>
+
+      {% if addprogramform.title.errors %}
+      <div class="registration-inputline-errors">
+        {{ addprogramform.title.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ addprogramform.degree.id_for_label }}">Ступень обучения</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ addprogramform.degree }}
+        </div>
+      </div>
+
+      {% if addprogramform.degree.errors %}
+      <div class="registration-inputline-errors">
+        {{ addprogramform.degree.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ addprogramform.description.id_for_label }}">Описание</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ addprogramform.description }}
+        </div>
+      </div>
+
+      {% if addprogramform.description.errors %}
+      <div class="registration-inputline-errors">
+        {{ addprogramform.description.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="register-header" style="margin-bottom: 25px;"><h2>Компетенции</h2></div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix competency-category">
+        <div class="registration-inputline-labelblock">
+          <label for="subject-areas">Категория</label>
+        </div>
+        <div class="registration-inputline-inputblock">
+          <select name="subject-areas" id="subject-areas">
+            <option selected="selected"></option>
+            {% for subject_area in subject_areas %}
+            <option value="{{ subject_area.id }}">{{ subject_area.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="subject-areas">Компетенция</label>
+        </div>
+        <div class="registration-inputline-inputblock">
+          <select name="competencies-select" id="competencies-select">
+            <option selected="selected"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    {{ addcompetencyfield_formset.management_form }}
+
+    <div class="competencies" id="competencies">
+      <div class="competencies-placeholder"><p>Выберите компетенции</p></div>
+      {% for form in addcompetencyfield_formset %}
+      {{ form }}
+      {% endfor %}
+    </div>
+
+    <div class="register-submit-block">
+      <input class="std-btn std-btn-final" type="submit" value="Добавить" />
+    </div>
+
+  </form>
+
+</div>
+{% endblock %}

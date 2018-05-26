@@ -1,0 +1,385 @@
+/* Common styles */
+
+.std-btn {
+  padding: 4px 12px;
+  background: var(--main-bg-color);
+  color: white;
+  text-decoration: none;
+  transition: .2s ease-out;
+  border-radius: 12px;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.std-btn:hover {
+  background: var(--main-bg-color-hover);
+  box-shadow: 2px 2px 3px 0 rgba(0,0,0,.2);
+}
+
+
+/* Verify users as students */
+
+.page-verifystudents .msg-success {
+  margin-bottom: 20px;
+}
+
+.page-verifystudents {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-verifystudents .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-verifystudents .submit-block {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.page-verifystudents .basic-table tbody tr:last-child td {
+  border-bottom: 1px solid rgb(240,240,240);
+}
+
+/* Display program */
+
+.page-displayprogram {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-displayprogram .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-displayprogram .infoline {
+  margin: 20px 0;
+}
+
+.page-displayprogram .infoline .infoline-title {
+  float: left;
+  width: 20%;
+}
+
+.page-displayprogram .infoline .infoline-data {
+  float: left;
+  width: 80%;
+}
+
+.page-displayprogram .competency-pill {
+  opacity: 1;
+  visibility: visible;
+  padding-right: 12px;
+}
+
+/* Display multiple programs */
+
+.page-displayprograms {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-displayprograms .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-displayprograms .basic-table {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.page-displayprograms .basic-table tbody tr:last-child td {
+  border-bottom: 1px solid rgb(240,240,240);
+}
+
+/* Display company */
+
+.page-displaycompany {
+  width: 1100px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.page-displaycompany-container {
+  width: 850px;
+  margin: 0 auto;
+  padding: 15px;
+  background: rgb(250,250,250);
+  box-sizing: border-box;
+}
+
+.page-displaycompany-container-header h1 {
+  font-weight: normal;
+  font-size: 1.3em;
+}
+
+.page-displaycompany-container-body .infoline {
+  margin: 20px 0;
+}
+
+.page-displaycompany-container-body .infoline .infoline-title {
+  float: left;
+  width: 20%;
+  box-sizing: border-box;
+}
+
+.page-displaycompany-container-body .infoline .infoline-data {
+  float: left;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.page-displaycompany-container-body-header {
+  margin-top: 40px;
+  background: linear-gradient(to top, rgb(250,250,250) 0%, rgb(250,250,250) 49%, rgb(220, 220, 220) calc(49% + 1px), rgb(250,250,250) calc(49% + 1px));
+}
+
+.page-displaycompany-container-body-header h2 {
+  display: inline-block;
+  font-weight: normal;
+  font-size: 1.1em;
+  padding-right: 15px;
+  background: rgb(250,250,250);
+}
+
+.page-displaycompany ul.vacancies {
+  margin-top: 15px;
+}
+
+.page-displaycompany ul.vacancies li {
+  list-style-position: inside;
+}
+
+.page-company-ownertools {
+  width: 850px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  padding: 10px;
+  background: rgb(250,250,250);
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.page-company-ownertools a {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 12px;
+  background: var(--main-bg-color);
+  color: white;
+  text-decoration: none;
+  font-size: .8em;
+  border-radius: 12px;
+  transition: .2s ease-out;
+}
+
+.page-company-ownertools a:hover {
+  background: var(--main-bg-color-hover);
+  box-shadow: 2px 2px 3px 0 rgba(0,0,0,.2);
+}
+
+/* Display vacancy */
+
+.page-displayvacancy {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-displayvacancy .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-displayvacancy .infoline {
+  margin: 20px 0;
+}
+
+.page-displayvacancy .infoline .infoline-title {
+  float: left;
+  width: 20%;
+}
+
+.page-displayvacancy .infoline .infoline-data {
+  float: left;
+  width: 80%;
+}
+
+.page-displayvacancy .competency-pill {
+  opacity: 1;
+  visibility: visible;
+  padding-right: 12px;
+}
+
+/* Display multiple vacancies */
+
+.page-displayvacancies {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-displayvacancies .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-displayvacancies .basic-table {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.page-displayvacancies .basic-table td:nth-child(1) {
+  width: 10%;
+}
+
+.page-displayvacancies .basic-table td:nth-child(2) {
+  width: 90%;
+}
+
+.page-displayvacancies .basic-table tbody tr:last-child td {
+  border-bottom: 1px solid rgb(240,240,240);
+}
+
+/* Verify students' jobs */
+
+.page-verifystudentsjobs .msg-success {
+  margin-bottom: 20px;
+}
+
+.page-verifystudentsjobs {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-verifystudentsjobs .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-verifystudentsjobs .submit-block {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.page-verifystudentsjobs .basic-table tbody tr:last-child td {
+  border-bottom: 1px solid rgb(240,240,240);
+}
+
+/* Verify students' competencies as company */
+
+.page-verifystudentscompetencies .msg-success {
+  margin-bottom: 20px;
+}
+
+.page-verifystudentscompetencies {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-verifystudentscompetencies .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-verifystudentscompetencies .submit-block {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.page-verifystudentscompetencies .basic-table tbody tr:last-child td {
+  border-bottom: 1px solid rgb(240,240,240);
+}
+
+.verification-pill-university, .verification-pill-company {
+  position: relative;
+  margin: 0 2px;
+  padding: 2px 12px;
+  padding-left: 27px;
+  background: var(--main-bg-color);
+  color: white;
+  font-size: .8em;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: .2s ease-out;
+}
+
+.verification-pill-university:hover, .verification-pill-company:hover {
+  background: var(--main-bg-color-hover);
+  box-shadow: 2px 2px 3px 0 rgba(0,0,0,.2);
+}
+
+.verification-pill-university::before, .verification-pill-company::before {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 12px;
+  height: 12px;
+  top: calc(50% - 6px);
+  left: 9px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  vertical-align: middle;
+}
+
+.verification-pill-university::before {
+  background-image: url(../img/student-cap.png);
+}
+
+.verification-pill-company::before {
+  background-image: url(../img/factory.png);
+}
+
+/* Display all universities */
+
+.page-displayuniversitiesall {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-displayuniversitiesall .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-displayuniversitiesall .basic-table {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.page-displayuniversitiesall .basic-table tbody tr:last-child td {
+  border-bottom: 1px solid rgb(240,240,240);
+}
+
+/* Display all companies */
+
+.page-displaycompaniesall {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-displaycompaniesall .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-displaycompaniesall .basic-table {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.page-displaycompaniesall .basic-table tbody tr:last-child td {
+  border-bottom: 1px solid rgb(240,240,240);
+}
+
+/* Display all vacancies */
+
+.page-displayvacanciesall {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.page-displayvacanciesall .page-mainheader {
+  margin: 50px 0 40px 0;
+}
+
+.page-displayvacanciesall .basic-table {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.page-displayvacanciesall .basic-table tbody tr:last-child td {
+  border-bottom: 1px solid rgb(240,240,240);
+}

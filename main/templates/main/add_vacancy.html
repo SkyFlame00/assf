@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+<script src="{% static 'js/add_vacancy.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+
+<div class="register-page register-page-hidden">
+  <div class="register-page-mainheader">
+    <h1>Добавить вакансию</h1>
+  </div>
+  
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ addvacancy_form.title.id_for_label }}">Название</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ addvacancy_form.title }}
+        </div>
+      </div>
+
+      {% if addvacancy_form.title.errors %}
+      <div class="registration-inputline-errors">
+        {{ addvacancy_form.title.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ addvacancy_form.description.id_for_label }}">Описание</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ addvacancy_form.description }}
+        </div>
+      </div>
+
+      {% if addvacancy_form.description.errors %}
+      <div class="registration-inputline-errors">
+        {{ addvacancy_form.description.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="register-header" style="margin-bottom: 25px;"><h2>Компетенции</h2></div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix competency-category">
+        <div class="registration-inputline-labelblock">
+          <label for="subject-areas">Категория</label>
+        </div>
+        <div class="registration-inputline-inputblock">
+          <select name="subject-areas" id="subject-areas">
+            <option selected="selected"></option>
+            {% for subject_area in subject_areas %}
+            <option value="{{ subject_area.id }}">{{ subject_area.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="subject-areas">Компетенция</label>
+        </div>
+        <div class="registration-inputline-inputblock">
+          <select name="competencies-select" id="competencies-select">
+            <option selected="selected"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    {{ addvacancycompetency_formset.management_form }}
+
+    <div class="competencies" id="competencies">
+      <div class="competencies-placeholder"><p>Выберите компетенции</p></div>
+      {% for form in addvacancycompetency_formset %}
+      {{ form }}
+      {% endfor %}
+    </div>
+
+    <div class="register-submit-block">
+      <input class="std-btn std-btn-final" type="submit" value="Добавить" />
+    </div>
+
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-displayprograms">
+  <div class="page-mainheader">
+    <h1>Все программы ({{ university.title }})</h1>
+  </div>
+
+  <table class="basic-table">
+    <thead>
+      <tr>
+        <td>Название программы</td>
+        <td>Ступень обучения</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for program in programs %}
+      <tr>
+        <td><a href="{% url 'display_program' program.id %}">{{ program.title }}</a></td>
+        <td>{{ program.get_degree_display }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock %}

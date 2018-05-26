@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-displayprogram">
+  <div class="page-mainheader">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <div class="infoline clearfix">
+    <div class="infoline-title">
+      Университет
+    </div>
+
+    <div class="infoline-data">
+      {{ university }}
+    </div>
+  </div>
+
+  <div class="infoline clearfix">
+    <div class="infoline-title">
+      Ступень обучения
+    </div>
+
+    <div class="infoline-data">
+      {{ program.get_degree_display }}
+    </div>
+  </div>
+
+  <div class="infoline clearfix">
+    <div class="infoline-title">
+      Описание
+    </div>
+
+    <div class="infoline-data">
+      {{ description }}
+    </div>
+  </div>
+
+  <div class="infoline clearfix">
+    <div class="infoline-title">
+      Компетенции
+    </div>
+
+    <div class="infoline-data">
+      {% for competency in competencies %}
+      <span class="competency-pill">{{ competency }}</span>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

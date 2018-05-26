@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-displayvacancies">
+  <div class="page-mainheader">
+    <h1>Все вакансии (<a href="{% url 'display_company' company.id %}">{{ company.name }}</a>)</h1>
+  </div>
+
+  <table class="basic-table">
+    <thead>
+      <tr>
+        <td>№</td>
+        <td>Наименование вакансии</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for vacancy in vacancies %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td><a href="{% url 'display_vacancy' vacancy.id %}">{{ vacancy.title }}</a> (<a href="{% url 'display_suitablestudents' vacancy.id %}">найти подходящих студентов</a>)</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock %}

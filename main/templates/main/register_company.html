@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="register-page register-page-hidden">
+  <div class="register-page-mainheader">
+    <h1>Регистрация компании</h1>
+  </div>
+
+  <form method="post" action="">
+    {% csrf_token %}
+
+    {{user_form.non_field_errors}}
+    {{company_form.non_field_errors}}
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.username.id_for_label }}">Логин компании</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.username }}
+        </div>
+      </div>
+
+      {% if user_form.username.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.username.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ company_form.name.id_for_label }}">Название компании</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ company_form.name }}
+        </div>
+      </div>
+
+      {% if company_form.name.errors %}
+      <div class="registration-inputline-errors">
+        {{ company_form.name.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.email.id_for_label }}">Рабочий e-mail</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.email }}
+        </div>
+      </div>
+
+      {% if user_form.email.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.email.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.password.id_for_label }}">Пароль</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.password }}
+        </div>
+      </div>
+
+      {% if user_form.password.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.password.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ user_form.password_confirmation.id_for_label }}">Подтверждение пароля</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ user_form.password_confirmation }}
+        </div>
+      </div>
+
+      {% if user_form.password_confirmation.errors %}
+      <div class="registration-inputline-errors">
+        {{ user_form.password_confirmation.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ company_form.foundation_year.id_for_label }}">Год основания</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ company_form.foundation_year }}
+        </div>
+      </div>
+
+      {% if company_form.foundation_year.errors %}
+      <div class="registration-inputline-errors">
+        {{ company_form.foundation_year.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="registration-inputline-wrapper">
+      <div class="registration-inputline clearfix">
+        <div class="registration-inputline-labelblock">
+          <label for="{{ company_form.description.id_for_label }}">Описание</label>
+        </div>
+
+        <div class="registration-inputline-inputblock">
+          {{ company_form.description }}
+        </div>
+      </div>
+
+      {% if company_form.description.errors %}
+      <div class="registration-inputline-errors">
+        {{ company_form.description.errors }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="register-submit-block">
+      <input class="std-btn std-btn-final" type="submit" value="Зарегистрироваться" />
+    </div>
+  </form>
+
+</div>
+
+{% endblock %}

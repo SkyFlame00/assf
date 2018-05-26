@@ -1,0 +1,318 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/student_profile.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+  {% if user_type == 'st' %}
+  {% load static %}
+
+  <script src="{% static 'js/profile.js' %}"></script>
+  {% endif %}
+
+{% endblock %}
+
+{% block main %}
+
+<!-- Student profile -->
+{% if user_type == 'st' %}
+<div class="page-studentprofile studentprofile page-studentprofile-hidden" id="page-studentprofile">
+  <div class="page-mainheader"><h1>Профиль</h1></div>
+
+  <div class="page-studentprofile-body">
+    <div class="studentprofile-content clearfix">
+      <div class="studentprofile-nav">
+        <ul>
+          <li><span class="active" id="main-info-btn">Основная информация</span></li>
+          <li><span id="educ-info-btn">Образование</span></li>
+          <li><span id="job-info-btn">Опыт работы</span></li>
+          <li><span id="competency-info-btn">Компетенции</span></li>
+        </ul>
+      </div>
+
+      <div class="studentprofile-body">
+        <div class="studentprofile-body-top">
+          <span class="studentprofile-body-top-title" id="studentprofile-body-top-title">
+            Основная информация
+          </span>
+        </div>
+
+        <div class="studentprofile-body-content">
+          <div class="main-info" id="main-info">
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Никнейм</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ data.username }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Имя</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ data.first_name }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Фамилия</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ data.last_name }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Отчество</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ data.patronymic }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>E-mail</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ data.email }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Город</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ data.city }}
+              </div>
+            </div>
+
+          </div>
+
+          <div class="educ-info studentprofile-div-hidden" id="educ-info">
+
+            {% for education in data.educations %}
+
+            <div class="education-num">
+              {% if data.educationsAmount > 1 %}<span class="counter">#{{forloop.counter}}</span>{% else %}<span></span>{% endif %}
+              {% if education.verified %}
+              <span class="verified">Подтверждено</span>
+              {% else %}
+              <span class="not-verified">Не подтверждено</span>
+              {% endif %}
+            </div>
+
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Университет</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ education.university }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Ступень обучения</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ education.get_degree_display }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Год начала</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ education.year_start }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Год окончания</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ education.year_end }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Направление обучения</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ education.program }}
+              </div>
+            </div>
+
+            {% endfor %}
+          </div>
+
+          <div class="job-info studentprofile-div-hidden" id="job-info">
+
+            {% for job in data.jobs %}
+
+            <div class="education-num">
+              {% if data.jobsAmount > 1 %}<span class="counter">#{{forloop.counter}}</span>{% endif %}
+              {% if job.verified %}
+              <span class="verified">Подтверждено</span>
+              {% else %}
+              <span class="not-verified">Не подтверждено</span>
+              {% endif %}
+            </div>
+
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Компания</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ job.company }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Позиция</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ job.position }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Год начала</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ job.year_start }}
+              </div>
+            </div>
+
+            <div class="info-line clearfix">
+              <div class="info-line-label">
+                <span>Год окончания</span>
+              </div>
+
+              <div class="info-line-body">
+                {{ job.year_end }}
+              </div>
+            </div>
+
+            {% endfor %}
+          </div>
+
+          <div class="competencies-info studentprofile-div-hidden" id="job-info">
+            <table>
+              <thead>
+                <tr>
+                  <td>№</td>
+                  <td>Компетенция</td>
+                  <td>Категория</td>
+                  <td>Кем подтверждено</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for competency in data.competencies %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ competency.competency }}</td>
+                  <td>{{ competency.competency.subject_area }}</td>
+                  <td>
+                    {% for verificator in competency.who_verified.all %}
+                      {% if verificator.user_type == 'unv' %}
+                      <a class="verification-pill-university" href="{% url 'display_university' verificator.university_set.all.0.id %}">{{ verificator.university_set.all.0.title }}</a>
+                      {% endif %}
+
+                      {% if verificator.user_type == 'com' %}
+                      <a class="verification-pill-company" href="{% url 'display_company' verificator.company_set.all.0.id %}">{{ verificator.company_set.all.0.name }}</a>
+                      {% endif %}
+                    {% endfor %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+<!-- University profile -->
+{% if user_type == 'unv' %}
+<div>Название: {{ data.title }}</div>
+<div>Год основания: {{ data.foundation_year }}</div>
+<div>Описание: {{ data.description }}</div>
+<div>Город: {{ data.city }}</div>
+<div>Верифицирован: {{ data.verified }}</div>
+
+<hr />
+Учебные программы (<a href="{% url 'display_programs' data.id %}">все</a>)
+
+<div>Бакалавриат</div>
+{% for bac in data.bachelor %}
+
+<div><a href="{% url 'display_program' bac.id %}" target="_blank">{{ bac.title }}</a> ({{ bac.get_degree_display }})</div>
+
+{% endfor %}
+
+
+<div>Магистратура</div>
+{% for mag in data.magister %}
+
+<div><a href="{% url 'display_program' mag.id %}" target="_blank">{{ mag.title }}</a> ({{ mag.get_degree_display }})</div>
+
+{% endfor %}
+
+{% endif %}
+
+
+<!-- Company profile -->
+{% if user_type == 'com' %}
+
+<div>Название: {{ data.name }}</div>
+<div>Год основания: {{ data.foundation_year }}</div>
+<div>Описание: {{ data.description }}</div>
+<div>Верифицирована: {{ data.verified }}</div>
+
+<hr />
+
+<div>Вакансии (<a href="{% url 'display_vacancies' data.id %}">все</a>)</div>
+{% for vacancy in data.vacancies %}
+<div><a href="{% url 'display_vacancy' vacancy.id %}">{{ vacancy.title }}</a></div>
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}" />
+{% endblock %}
+
+{% block additionals %}
+{% load static %}
+
+{% endblock %}
+
+{% block main %}
+
+<div class="page-verifystudentsjobs">
+  <div class="page-mainheader">
+    <h1>Верифицировать опыт работы студентов</h1>
+  </div>
+
+  {% if success == True %}
+  <div class="msg-success">Изменения успешно сохранены</div>
+  {% endif %}
+
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <table class="basic-table">
+      <thead>
+        <tr>
+          <td>ФИО</td>
+          <td>Должность</td>
+          <td>Год начала</td>
+          <td>Год окончания</td>
+          <td>Верифицирован</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{ verifystudentjob_formset.management_form }}
+        {% for item in data %}
+        <tr>
+          <td><a href="{% url 'verify_student_competencies' item.student_id %}">{{ item.name }}</a></td>
+          <td>{{ item.position }}</td>
+          <td>{{ item.year_start }}</td>
+          <td>{{ item.year_end }}</td>
+          <td>
+            {{ item.form.num }}
+            {{ item.form.verified }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="submit-block">
+      <input class="std-btn" type="submit" value="Сохранить" />
+    </div>
+  </form>
+
+</div>
+
+{% endblock %}
